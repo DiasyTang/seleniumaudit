@@ -1,5 +1,8 @@
 import json
 import unittest
+import sys
+
+sys.path.append("./")
 from common.configHttp import runMain
 import testFile.getUrlParams as getUrlParams
 import urllib.parse
@@ -23,7 +26,7 @@ class testUserLogin(unittest.TestCase):
         self.case_name
 
     def setUp(self):
-        print(self.case_name + "测试开始前准备")
+        # print("%s测试开始前准备" % self.case_name.encode(encoding="utf8"))
 
     def tearDown(self):
         print("测试结束，输出log完结\n\n")
@@ -43,3 +46,7 @@ class testUserLogin(unittest.TestCase):
             assert ss["code"] == -1
         if self.case_name == "login_null":
             assert ss["code"] == 10001
+
+
+if __name__ == "__main__":
+    unittest.main

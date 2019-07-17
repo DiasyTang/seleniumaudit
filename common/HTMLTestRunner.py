@@ -615,7 +615,7 @@ class HTMLTestRunner(Template_mixin):
         test(result)
         self.stopTime = datetime.datetime.now()
         self.generateReport(test, result)
-        print >>sys.stderr, "\nTime Elapsed: %s" % (self.stopTime - self.startTime)
+        print("\nTime Elapsed: %s" % (self.stopTime - self.startTime), file=sys.stderr)
         return result
 
     def sortResult(self, result_list):
@@ -748,18 +748,18 @@ class HTMLTestRunner(Template_mixin):
         if isinstance(o, str):
             # TODO: some problem with 'string_escape': it escape \n and mess up formating
             # uo = unicode(o.encode('string_escape'))
-            uo = o.decode("latin-1")
-        else:
             uo = o
+        else:
+            uo = o.decode(encoding='utf-8')
         if isinstance(e, str):
             # TODO: some problem with 'string_escape': it escape \n and mess up formating
             # ue = unicode(e.encode('string_escape'))
-            ue = e.decode("latin-1")
-        else:
             ue = e
-
+        else:
+            ue = e.decode(encoding='utf-8')
+  
         script = self.REPORT_TEST_OUTPUT_TMPL % dict(
-            id=tid, output=saxutils.escape(uo + ue)
+            id=tid, output=saxutils.escape(uo+ue)
         )
 
         row = tmpl % dict(

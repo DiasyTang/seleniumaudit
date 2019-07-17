@@ -5,14 +5,16 @@ import sys
 
 # from testFile import getPathInfo, readConfig
 sys.path.append("./")
-from testFile.readConfig import readConfig
-from testFile.getPathInfo import get_Path
+from testFile import readConfig
+from testFile import getPathInfo
 
-read_conf = readConfig()
+read_conf = readConfig.readConfig()
 subject = read_conf.get_email("subject")
 app = str(read_conf.get_email("app"))
 address = read_conf.get_email("address")
-mail_path = os.path.join(get_Path(), "result", "report.html")
+mail_path = os.path.join(
+    getPathInfo.get_Path().replace("\\testFile", ""), "result", "report.html"
+)
 
 
 class send_email:
