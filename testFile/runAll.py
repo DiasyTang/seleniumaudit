@@ -37,9 +37,12 @@ class AllTest:
         suite_module = []
         for case in self.caseList:
             case_name = case.split("/")[-1]
+            topDir = case.split("/")[0]
             print(case_name + ".py")
             discover = unittest.defaultTestLoader.discover(
-                self.caseFile, pattern=case_name + ".py", top_level_dir=None
+                os.path.join(self.caseFile, topDir),
+                pattern=case_name + ".py",
+                top_level_dir=None,
             )
             suite_module.append(discover)
             print("suite_module:" + str(suite_module))

@@ -117,7 +117,7 @@ class OutputRedirector(object):
         self.fp = fp
 
     def write(self, s):
-        self.fp.write(s)
+        self.fp.write(s.encode("utf-8"))
 
     def writelines(self, lines):
         self.fp.writelines(lines)
@@ -750,16 +750,16 @@ class HTMLTestRunner(Template_mixin):
             # uo = unicode(o.encode('string_escape'))
             uo = o
         else:
-            uo = o.decode(encoding='utf-8')
+            uo = o.decode(encoding="utf-8")
         if isinstance(e, str):
             # TODO: some problem with 'string_escape': it escape \n and mess up formating
             # ue = unicode(e.encode('string_escape'))
             ue = e
         else:
-            ue = e.decode(encoding='utf-8')
-  
+            ue = e.decode(encoding="utf-8")
+
         script = self.REPORT_TEST_OUTPUT_TMPL % dict(
-            id=tid, output=saxutils.escape(uo+ue)
+            id=tid, output=saxutils.escape(uo + ue)
         )
 
         row = tmpl % dict(

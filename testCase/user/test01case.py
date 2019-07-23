@@ -26,7 +26,7 @@ class testUserLogin(unittest.TestCase):
         self.case_name
 
     def setUp(self):
-        # print("%s测试开始前准备" % self.case_name.encode(encoding="utf8"))
+        print(self.case_name + "测试开始前准备")
 
     def tearDown(self):
         print("测试结束，输出log完结\n\n")
@@ -35,10 +35,11 @@ class testUserLogin(unittest.TestCase):
         self.checkResult()
 
     def checkResult(self):
-        url1 = "http://www.xxx.com/login?"
-        new_url = url1 + self.query
-        data1 = dict(urllib.parse.parse_qsl(urllib.parse.urlsplit(new_url).query))
-        info = runMain.run_main(self.method, url, data1)
+        # url1 = "http://www.xxx.com/login?"
+        # new_url = url1 + self.query
+        # data1 = dict(urllib.parse.parse_qsl(urllib.parse.urlsplit(new_url).query))
+        data1 = dict(urllib.parse.parse_qsl(self.query))
+        info = runMain().run_main(self.method, url, data1)
         ss = json.loads(info)
         if self.case_name == "login":
             assert ss["code"] == 200
